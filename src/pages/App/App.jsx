@@ -6,6 +6,7 @@ import AuthPage from '../AuthPage/AuthPage';
 import NewOrderPage from '../NewOrderPage/NewOrderPage';
 import AllParksPage from '../AllParksPage/AllParksPage';
 import NavBar from '../../components/NavBar/NavBar';
+// import * as parksAPI from '../../utilities/parks-api';
 
 export default function App() {
   const [user, setUser] = useState(getUser());

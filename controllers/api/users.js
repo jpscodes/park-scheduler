@@ -8,6 +8,8 @@ module.exports = {
   checkToken
 };
 
+
+
 function checkToken(req, res) {
   // Verify middleware is doing its job
   console.log('req.user', req.user);
