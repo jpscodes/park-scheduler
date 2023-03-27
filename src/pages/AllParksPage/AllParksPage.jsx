@@ -66,7 +66,7 @@ export default function AllParksPage() {
         <ul>
           {parksData2.map(park2 => (
             <div>
-              <li>{park2.name} - {park2.feature_desc} - {park2.hours} - <Link to="/parks/details">See Details for special data</Link></li>
+              <li>{park2.name} - {park2.feature_desc} - {park2.hours} - <Link parks={parksData2} to="/parks/details">See Details for special data</Link></li>
             </div>
           ))}
         </ul>

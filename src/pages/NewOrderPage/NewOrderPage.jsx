@@ -1,5 +1,9 @@
-export default function NewOrderPage() {
+export default function NewOrderPage(props) {
+  console.log(props)
   return (
-    <h1>NewOrderPage</h1>
+    <div>
+      <div>{}</div>
+      <h1>Park Details</h1>
+    </div>
   );
 }
