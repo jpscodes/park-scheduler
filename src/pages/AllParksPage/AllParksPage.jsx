@@ -2,6 +2,8 @@ import { checkToken } from "../../utilities/users-service";
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as parksAPI from '../../utilities/parks-api'
+import './AllParksPage.css';
+import { Card, ListGroup } from 'react-bootstrap';
 
 
 export default function AllParksPage() {
@@ -30,16 +32,31 @@ export default function AllParksPage() {
         <input type="text" onChange={(evt) => setSearch(evt.target.value)} value={search}/>
         <button type="submit">Search Parks</button>
       </form>
-      {parksData2 && (
-        <ul>
-          {parksData2.map(park2 => (
-            <div className="all-parks">
-              <li>{park2.name}</li>
-              <li> - {park2.feature_desc} - {park2.hours} - <Link to="/parks/details">See Details for special data</Link></li>
-            </div>
-          ))}
-        </ul>
-      )}
+      <div className="parks-container">
+      {parksData2.map(park => (
+          <Card key={park._id} className="park-card">
+            <Card.Header>
+              <Card.Title>{park.name}</Card.Title>
+            </Card.Header>
+            <Card.Body>
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  <strong>Features: </strong>
+                  <br />
+                  {park.feature_desc.map(feature => (
+                    <span key={feature}>{feature} | </span>
+                  ))}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <strong>Hours: </strong>
+                  {park.hours}
+                </ListGroup.Item>
+              </ListGroup>
+              <Link to={`/parks/${park._id}`}>Details</Link>
+            </Card.Body>
+          </Card>
+        ))}
+      </div>
     </>
   );
 }
