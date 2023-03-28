@@ -7,5 +7,6 @@ const parksCtrl = require('../../controllers/api/parks');
 // const ROOT_URL = 'https://data.seattle.gov/resource/2cer-njie.json';
 
 router.get('/', parksCtrl.searchAPI);
+router.get('/:id', parksCtrl.getPark);
 
 module.exports = router;

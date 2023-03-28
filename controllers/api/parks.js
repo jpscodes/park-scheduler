@@ -4,7 +4,8 @@ const Reservation = require('../../models/reservation');
 const Park = require('../../models/park');
 
 module.exports = {
-  searchAPI
+  searchAPI,
+  getPark
 };
 
 async function searchAPI(req, res) {
@@ -57,4 +58,8 @@ function formatParkData(parks) {
   ))
 }
     
-  
+async function getPark(req, res) {
+  const park = await Park.findById(req.params.id)
+  res.json(park);
+  console.log(park)
+}

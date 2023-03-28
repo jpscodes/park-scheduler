@@ -50,9 +50,7 @@ export default function AllParksPage() {
                   {park.hours}
                 </ListGroup.Item>
               </ListGroup>
-              {/* <Link to={`/parks/${park._id}`}>Details</Link> */}
-              {console.log(park, 'the park object')}
-              <Link to={{pathname: `/parks/${park._id}`, state: {park}}}>Details</Link>
+              <Link to={`/parks/${park._id}`}>Details</Link>
             </Card.Body>
           </Card>
         ))}
