@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import * as parksAPI from '../../utilities/parks-api'
 import './AllParksPage.css';
 import { Card, ListGroup } from 'react-bootstrap';
-
+import { useLocation } from 'react-router-dom';
 
 export default function AllParksPage() {
   // const [parksData, setParksData] = useState([]);
@@ -15,8 +15,6 @@ export default function AllParksPage() {
     const expDate = await checkToken()
     console.log(expDate)
   };
-
-
 
   async function handleSearch(evt) {
     evt.preventDefault();
@@ -52,7 +50,9 @@ export default function AllParksPage() {
                   {park.hours}
                 </ListGroup.Item>
               </ListGroup>
-              <Link to={`/parks/${park._id}`}>Details</Link>
+              {/* <Link to={`/parks/${park._id}`}>Details</Link> */}
+              {console.log(park, 'the park object')}
+              <Link to={{pathname: `/parks/${park._id}`, state: {park}}}>Details</Link>
             </Card.Body>
           </Card>
         ))}

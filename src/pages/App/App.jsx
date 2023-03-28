@@ -6,6 +6,7 @@ import AuthPage from '../AuthPage/AuthPage';
 import NewOrderPage from '../NewOrderPage/NewOrderPage';
 import AllParksPage from '../AllParksPage/AllParksPage';
 import NavBar from '../../components/NavBar/NavBar';
+import ParkDetailPage from '../ParkDetailPage/ParkDetailPage';
 // import * as parksAPI from '../../utilities/parks-api';
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
               {/* Route components in here */}
               <Route path="/parks/details" element={<NewOrderPage />} />
               <Route path="/parks" element={<AllParksPage />} />
+              <Route path="/parks/:id" element={<ParkDetailPage />} />
             </Routes>
           </>
           :
