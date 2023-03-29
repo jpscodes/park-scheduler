@@ -1,7 +1,9 @@
 import sendRequest from "./send-request";
 const BASE_URL = '/api/parks';
 
+
 export async function makeReservation(search) {
+  console.log('made it to utilities')
   return sendRequest(`${BASE_URL}/?search=${search}`);
 }
 

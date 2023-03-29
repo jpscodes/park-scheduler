@@ -3,7 +3,7 @@ const router = express.Router();
 const reservationsCtrl = require('../../controllers/api/reservations');
 
 
-router.post('/:id', reservationsCtrl.makeReservation);
+router.post('/', reservationsCtrl.makeReservation);
 
 
 module.exports = router;

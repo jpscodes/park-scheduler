@@ -30,8 +30,9 @@ export default function ParkDetailPage() {
       ...reservation, 
       park: park._id,
     }
-    const r = await reservationsAPI.makeReservation(id)
-    console.log(r, 'rrrrrrrrrr')
+
+    console.log(newReservation, 'rrrrrrrrrr')
+    const r = await reservationsAPI.makeReservation(newReservation)
   }
   
   
@@ -126,7 +127,7 @@ export default function ParkDetailPage() {
         <div className="form-container">
           <div className="reservation-form px-4 py-3">
             <h3>Make a Reservation</h3>
-            <Form onChange={handleChange}>
+            <Form onChange={handleChange} onSubmit={handleSubmit}>
               <Form.Group>
                 <Form.Label>Reservation Name</Form.Label>
                 <Form.Control name="name" type="text" placeholder="Enter Reservation Name" />
