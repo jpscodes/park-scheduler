@@ -1,12 +1,39 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
-import * as parksAPI from '../../utilities/parks-api'
-import './ParkDetailPage.css'
+import * as parksAPI from '../../utilities/parks-api';
+import * as reservationsAPI from '../../utilities/reservations-api';
+import './ParkDetailPage.css';
 
 export default function ParkDetailPage() {
   const [park, setPark] = useState({});
+  const [parkHoursStart, setParkHoursStart] = useState([]);
+  const [parkHoursEnd, setParkHoursEnd] = useState([]);
+  const [weekOffset, setWeekOffset] = useState(0);
+  const [reservation, setReservation] = useState({
+    name: '',
+    feature_desc: 'Baseball/Softball',
+    reservationDate: '',
+    startHour: '',
+    endHour: '',
+  });
   const {id} = useParams();
+
+  function handleChange(evt) {
+    const newReservation = {...reservation, [evt.target.name]: evt.target.value}
+    setReservation(newReservation)
+  }
+  
+  async function handleSubmit(evt) {
+    evt.preventDefault()
+    const newReservation = {
+      ...reservation, 
+      park: park._id,
+    }
+    const r = await reservationsAPI.makeReservation(id)
+    console.log(r, 'rrrrrrrrrr')
+  }
+  
   
   useEffect(() => {
     async function getDetails() {
@@ -17,8 +44,6 @@ export default function ParkDetailPage() {
     getDetails()
   }, [])
   
-  const [parkHoursStart, setParkHoursStart] = useState([]);
-  const [parkHoursEnd, setParkHoursEnd] = useState([]);
   useEffect(() => {
     function extractHours() {
       console.log(park.hours)
@@ -26,7 +51,7 @@ export default function ParkDetailPage() {
         setParkHoursStart(['24 Hours', 0])
         setParkHoursEnd(['24 Hours', 23])
       } else if (park.hours) {
-        park.hours = '4:30 a.m. - 11:30 p.m.'
+        // park.hours = '4:30 a.m. - 11:30 p.m.'
         let parkOpen = park.hours.match(/(\d{1,2})(?::\d{1,2})?\s*a\.m\.|\s*p\.m\./);
         parkOpen[1] = parseInt(parkOpen[1])
         setParkHoursStart(parkOpen)
@@ -52,29 +77,27 @@ export default function ParkDetailPage() {
       timeSlots.push(`${hour.toString()}:${minute.toString().padStart(2, '0')}`);
     }
   }
+
   const now = new Date();
-  const startOfWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay());
+  const startOfWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay() + (7 * weekOffset));
   const days = [];
   for (let i = 0; i < 7; i++) {
     const date = new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate() + i);
     days.push(date);
   }
   console.log(timeSlots, days)
-  
 
   return (
-  <>
-    <div>Park Details:</div>
-    <div>Name: {park.name}</div>
-    <div>Hours: {park.hours}</div>
-    {/* {park.feature_desc.map((f) => 
-      <ul>Features: {f}<li></li></ul>
-    )} */}
-    <hr />
-    <Container>
-      <h2>Calendar</h2>
-      <Row style={{ flexDirection: "row-reverse" }}>
-        <Col md={8}>
+    <>
+      <div>Park Details</div>
+      <div>Name: {park.name}</div>
+      <div>Hours: {park.hours}</div>
+      <hr />
+      <div className="calendar-container">
+        <div className="table-container">
+          <h2>Calendar</h2>
+            <Button onClick={() => setWeekOffset(weekOffset - 1)}>{'<'}</Button>
+            <Button onClick={() => setWeekOffset(weekOffset + 1)}>{'>'}</Button>
           <Table striped bordered>
             <thead>
               <tr>
@@ -99,26 +122,40 @@ export default function ParkDetailPage() {
               ))}
             </tbody>
           </Table>
-        </Col>
-        <Col md={4}>
+        </div>
+        <div className="form-container">
           <div className="reservation-form px-4 py-3">
             <h3>Make a Reservation</h3>
-            <Form>
+            <Form onChange={handleChange}>
               <Form.Group>
                 <Form.Label>Reservation Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter your name" />
+                <Form.Control name="name" type="text" placeholder="Enter Reservation Name" />
               </Form.Group>
               <Form.Group>
                 <Form.Label>Reservation Date</Form.Label>
-                <Form.Control type="date" />
+                <Form.Control name="reservationDate" type="date" />
               </Form.Group>
               <Form.Group>
                 <Form.Label>Start Time</Form.Label>
-                <Form.Control type="time" />
+                <Form.Control name="startHour" as="select" id="start-time">
+                  <option value="default">Select Time</option>
+                  {timeSlots.map((time, index) => (
+                    <option key={index} value={time}>
+                      {time}
+                    </option>
+                  ))}
+                </Form.Control>
               </Form.Group>
               <Form.Group>
                 <Form.Label>End Time</Form.Label>
-                <Form.Control type="time" />
+                <Form.Control name="endHour" as="select" id="end-time">
+                  <option value="default">Select Time</option>
+                  {timeSlots.map((time, index) => (
+                    <option key={index} value={time}>
+                      {time}
+                    </option>
+                  ))}
+                </Form.Control>
               </Form.Group>
               <Button
                 variant="success"
@@ -129,9 +166,8 @@ export default function ParkDetailPage() {
               </Button>
             </Form>
           </div>
-        </Col>
-      </Row>
-    </Container>
-  </>
-  )
+        </div>
+      </div>
+    </>
+  );
 }

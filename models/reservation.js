@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const reservationSchema = new Schema({
   name: {type: String, required: true},
   feature_desc: { type: String, required: true },
+  reservationDate: {type: Date},
   startHour: {},
   endHour: {},
   user: {
@@ -11,6 +12,11 @@ const reservationSchema = new Schema({
     ref: 'User',
     required: true,
   },
+  park: {
+    type: Schema.Types.ObjectId,
+    ref: 'Park',
+    required: true
+  }
 }, {
   timestamps: true,
   }
