@@ -3,8 +3,9 @@ const Schema = mongoose.Schema;
 
 const reservationSchema = new Schema({
   name: {type: String, required: true},
-  feature_desc: { },
-  
+  feature_desc: { type: String, required: true },
+  startHour: {},
+  endHour: {},
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',

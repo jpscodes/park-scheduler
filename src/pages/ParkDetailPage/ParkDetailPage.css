@@ -1,0 +1,51 @@
+.reservation-form {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  height: 100%;
+  width: 25%;
+}
+
+.btn-stadium {
+  border-radius: 50px;
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+}
+
+.calendar-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar-container .table-container {
+  flex: 3;
+  margin-right: 20px;
+}
+
+.calendar-container .form-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.reservation-form form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.reservation-form label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.reservation-form input {
+  margin-bottom: 10px;
+}
+
+.reservation-form input[type="submit"] {
+  margin-top: auto;
+}
