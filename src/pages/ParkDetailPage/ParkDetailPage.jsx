@@ -6,9 +6,9 @@ import * as reservationsAPI from '../../utilities/reservations-api';
 import ParkAvailabilityCalendar from '../../components/ParkAvailabilityCalendar/ParkAvailabilityCalendar'
 import './ParkDetailPage.css';
 
-export default function ParkDetailPage() {
-  let timeSlots = ['1:00', '2:00']
-  // need help passing data to this page that's needed from my components
+export default function ParkDetailPage(props) {
+  let timeSlots = [1, 2, 3, 4, 5]
+  // need help passing data to this page that's needed from my components, but do I need to make it a state vaiable
   const [park, setPark] = useState({});
   const [parkHoursStart, setParkHoursStart] = useState([]);
   const [parkHoursEnd, setParkHoursEnd] = useState([]);
@@ -34,10 +34,7 @@ export default function ParkDetailPage() {
       ...reservation, 
       park: park._id,
     }
-
-    console.log(newReservation, 'rrrrrrrrrr')
     const r = await reservationsAPI.makeReservation(newReservation)
-    console.log(r, 'returnnnn')
   }
   
   async function getReservations(evt) {
@@ -51,12 +48,10 @@ export default function ParkDetailPage() {
     async function getDetails() {
       const parkDetail = await parksAPI.getPark(id)
       setPark(parkDetail)
-      console.log(park)
     }
     getDetails()
   }, [])
   
-  console.log(park.feature_desc, 'array???')
 
   const reservableFeatures = ['Baseball/Softball', 'Flag Football', 'Football', 'Golf', 'Lacrosse', 'Lawn Bowling', 'Pickelball Court', 'Rugby', 'Soccer', 'T-Ball']
   return (

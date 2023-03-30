@@ -5,8 +5,8 @@ const reservationSchema = new Schema({
   name: {type: String, required: true},
   feature_desc: { type: String, required: true },
   reservationDate: {type: Date},
-  startHour: {},
-  endHour: {},
+  startHour: {type: Number},
+  endHour: {type: Number},
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
