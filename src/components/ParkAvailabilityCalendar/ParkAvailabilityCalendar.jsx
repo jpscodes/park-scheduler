@@ -1,3 +1,7 @@
+import './ParkAvailabilityCalendar.css'
+
 export default function ParkAvailabilityCalendar() {
-  return
+
+  
+  return <>Calendar Component here!!</>
 }

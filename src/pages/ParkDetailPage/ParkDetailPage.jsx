@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 import * as parksAPI from '../../utilities/parks-api';
 import * as reservationsAPI from '../../utilities/reservations-api';
+import ParkAvailabilityCalendar from '../../components/ParkAvailabilityCalendar/ParkAvailabilityCalendar'
 import './ParkDetailPage.css';
 
 export default function ParkDetailPage() {
@@ -10,6 +11,7 @@ export default function ParkDetailPage() {
   const [parkHoursStart, setParkHoursStart] = useState([]);
   const [parkHoursEnd, setParkHoursEnd] = useState([]);
   const [weekOffset, setWeekOffset] = useState(0);
+  const [reservations, setReservations] = useState('');
   const [reservation, setReservation] = useState({
     name: '',
     feature_desc: 'Baseball/Softball',
@@ -33,8 +35,16 @@ export default function ParkDetailPage() {
 
     console.log(newReservation, 'rrrrrrrrrr')
     const r = await reservationsAPI.makeReservation(newReservation)
+    console.log(r, 'returnnnn')
   }
-  
+    
+  useEffect(() => 
+    async function getReservations() {
+      // need to pass in park, park feature and reservation date to get reservations applicable
+      const reservations = await reservationsAPI.getReservations(id)
+
+    }
+  )  
   
   useEffect(() => {
     async function getDetails() {
@@ -69,27 +79,29 @@ export default function ParkDetailPage() {
 
     extractHours();
   }, [park])
-
   
   const timeSlots = [];
   console.log(parkHoursStart, parkHoursEnd, 'parseeerr')
-  for (let hour = parseInt(parkHoursStart[1]); hour <= parseInt(parkHoursEnd[1]) ; hour++) {
-    for (let minute of [ 0, 30 ]) {
-      timeSlots.push(`${hour.toString()}:${minute.toString().padStart(2, '0')}`);
-    }
-  }
-
+  
   const now = new Date();
   const startOfWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay() + (7 * weekOffset));
   const days = [];
   for (let i = 0; i < 7; i++) {
     const date = new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate() + i);
     days.push(date);
+    for (let hour = parseInt(parkHoursStart[1]); hour <= parseInt(parkHoursEnd[1]) ; hour++) {
+      for (let minute of [ 0, 30 ]) {
+        timeSlots.push(`${hour.toString()}:${minute.toString().padStart(2, '0')}`);
+        
+        //make search req to reservations db to check if the current park (parkfeature - do later) and day has any reservations, if so check the start time and end time to render reserved
+      }
+    }
   }
   console.log(timeSlots, days)
 
   return (
     <>
+      <ParkAvailabilityCalendar />
       <div>Park Details</div>
       <div>Name: {park.name}</div>
       <div>Hours: {park.hours}</div>

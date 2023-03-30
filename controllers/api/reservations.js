@@ -6,6 +6,9 @@ module.exports = {
 };
 
 async function makeReservation(req, res) {
-  console.log(req, 'made it to controller')
+  req.body.user = req.user._id
+  const reservation = await Reservation.create(req.body)
+  res.json(reservation)
+  console.log(req.body, 'made it to controller')
   
 }
