@@ -46,7 +46,8 @@ export default function ParkAvailabilityCalendar({park}) {
         });
       }
       console.log(park._id)
-      const reservationsVar = await reservationsAPI.searchReservations(park._id)
+      const reservations = await reservationsAPI.searchReservations(park._id)
+      console.log(reservations)
       // will iterate through documents to find right day, find first object that matches start time and set to reserved true until we get to end time in while (time is <= end time of reservation) loop and set reserved to true 
       // const compareReservation = reservationsAPI.searchReservations() ??
       setWeekCalendar(weeklyCalendar)
