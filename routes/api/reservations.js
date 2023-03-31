@@ -4,7 +4,7 @@ const reservationsCtrl = require('../../controllers/api/reservations');
 
 
 router.post('/', reservationsCtrl.makeReservation);
-router.get('/', reservationsCtrl.searchReservations);
+router.get('/:id', reservationsCtrl.searchReservations);
 
 
 module.exports = router;

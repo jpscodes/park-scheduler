@@ -24,7 +24,7 @@ export default function ParkDetailPage(props) {
   const {id} = useParams();
 
   function handleChange(evt) {
-    const newReservation = {...reservation, [evt.target.name]: evt.target.value}
+    const newReservation = {...reservation, [evt.target.name]: evt.target.value}  
     setReservation(newReservation)
   }
   

@@ -7,11 +7,15 @@ export async function makeReservation(reservations) {
   return sendRequest(`${BASE_URL}`, 'POST', reservations);
 }
 
-export async function searchReservations(search) {
+export async function searchReservations(parkId) {
   console.log('made it to utilities')
-  return sendRequest(`${BASE_URL}/?search=${search}`);
+  return sendRequest(`${BASE_URL}/${parkId}`);
 }
 
+// export async function searchReservations(search) {
+//   console.log('made it to utilities')
+//   return sendRequest(`${BASE_URL}/?search=${search}`);
+// }
 
 
 
