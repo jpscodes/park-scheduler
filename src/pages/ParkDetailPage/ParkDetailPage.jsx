@@ -37,13 +37,6 @@ export default function ParkDetailPage(props) {
     const r = await reservationsAPI.makeReservation(newReservation)
   }
   
-  async function getReservations(evt) {
-    evt.preventDefault();
-    // need to pass in park, park feature and reservation date to get reservations applicable
-    const reservationsSearch = await reservationsAPI.searchReservations(evt)
-    
-  }
-  
   useEffect(() => {
     async function getDetails() {
       const parkDetail = await parksAPI.getPark(id)
@@ -52,7 +45,6 @@ export default function ParkDetailPage(props) {
     getDetails()
   }, [])
   
-
   const reservableFeatures = ['Baseball/Softball', 'Flag Football', 'Football', 'Golf', 'Lacrosse', 'Lawn Bowling', 'Pickelball Court', 'Rugby', 'Soccer', 'T-Ball']
   return (
     <>

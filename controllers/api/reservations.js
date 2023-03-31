@@ -15,9 +15,9 @@ async function makeReservation(req, res) {
 }
 
 async function searchReservations(req, res) {
-  console.log(req.body, 'made it to controller')
+  console.log(req, 'made it to controller')
   const reservations = await Reservation.find(req.body)
-  res.json(reservations)
+  // res.json(reservations)
   
   
 }
