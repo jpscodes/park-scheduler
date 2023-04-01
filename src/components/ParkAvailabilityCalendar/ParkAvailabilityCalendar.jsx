@@ -28,7 +28,6 @@ export default function ParkAvailabilityCalendar({park}) {
       }
       return (parkHoursStart, parkHoursEnd)
     }
-    checkReservations();
     extractHours();
   }, [park])
   
@@ -49,9 +48,6 @@ export default function ParkAvailabilityCalendar({park}) {
       });
     }
     setWeekCalendar(weeklyCalendar)
-    
-    // console.log(park._id)
-
   }
 
   useEffect(() => { 
@@ -70,15 +66,10 @@ export default function ParkAvailabilityCalendar({park}) {
           day.slots.push({time, reserved: false})
         });
       }
+      checkReservations()
       setWeekCalendar(weeklyCalendar)
       console.log(park, 'parkkk')
-      
-      // console.log(reservations)
-      // will iterate through documents to find right day, find first object that matches start time and set to reserved true until we get to end time in while (time is <= end time of reservation) loop and set reserved to true 
-      // const compareReservation = reservationsAPI.searchReservations() ??
-      
     }
-    checkReservations()
     renderCalendar()
   }, [weekOffset])
   console.log(weekCalendar, 'weekCalendar')
@@ -89,32 +80,27 @@ export default function ParkAvailabilityCalendar({park}) {
     const reservations = await reservationsAPI.searchReservations(park._id)
     console.log(reservations)
     reservations.forEach((res) => {
-      console.log(res, 'my res')
-      console.log(park, 'my park')
-      if (res.feature_desc === park.feature_desc) {console.log('res for matching features of a given park')}
       weekCalendar.forEach((day) => {
-        // console.log((new Date(new Date(day.date).toLocaleDateString())).setHours(0, 0, 0, 0,), day.date)
-        // console.log((new Date(res.reservationDate)).setHours(0, 0, 0, 0,), res.reservationDate)
-        // console.log((new Date(res.reservationDate).setHours(0, 0, 0, 0,)) === new Date(new Date(day.date).toLocaleDateString()).setHours(0, 0, 0, 0,))
         if ((new Date(res.reservationDate).setHours(0, 0, 0, 0,)) === new Date(new Date(day.date).toLocaleDateString()).setHours(0, 0, 0, 0,)) {
-            console.log('reservation day match')
+            console.log(res, 'my res')
             console.log(day, 'day object')
             day.slots.forEach((time) => {
-              if (time.time === res.startHour) 
-              console.log(time.time, 'timeeee')
-              console.log(res.startHour, 'res time')
-                while (res.startHour < res.endHour) {
-                  time.reserved = true
-                  console.log('what')
-                }
-                  
+              console.log(time, 'timeeeeeeeeeeeeeeeeeee')
+              if (time.time >= res.startHour && time.time < res.endHour) {
+                console.log(time.time, 'timeeee')
+                console.log(res.startHour, 'res time')
+                time.reserved = true
+                console.log(time, 'times altered ')
+              }
             })
           }
         })
       })
+      console.log(weekCalendar, 'This is correct array i want rendered')
+      // setWeekCalendar(weekCalendar) not working because my calendar gets rerendered 
     }
-
   }
+  
 
   // async function getReservations(evt) {
   //   evt.preventDefault();
@@ -149,7 +135,7 @@ export default function ParkAvailabilityCalendar({park}) {
             <tr key={index}>
               <td>{slot.time}</td>
               {weekCalendar && weekCalendar.map((day, index) => (
-                <td key={index}>
+                <td key={index} style={{backgroundColor: day.slots[index].reserved ? '#FFC0CB' : '#90EE90'}}>
                   {day.slots[index].reserved ? "Reserved" : "Available"}
                 </td>
               ))}
