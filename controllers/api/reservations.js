@@ -8,10 +8,6 @@ module.exports = {
 
 async function makeReservation(req, res) {
   req.body.user = req.user._id
-
-  let date = new Date()
-  let newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay())
-  console.log(newDate)
   const reservation = await Reservation.create(req.body)
   res.json(reservation)
   

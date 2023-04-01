@@ -93,10 +93,23 @@ export default function ParkAvailabilityCalendar({park}) {
       console.log(park, 'my park')
       if (res.feature_desc === park.feature_desc) {console.log('res for matching features of a given park')}
       weekCalendar.forEach((day) => {
-        console.log(typeof res.reservationDate)
-        // if (res.reservationDate.toLocaleDateString() === day.date.toLocaleDateString()) {
-        //     console.log('reservation day match')
-        //   }
+        // console.log((new Date(new Date(day.date).toLocaleDateString())).setHours(0, 0, 0, 0,), day.date)
+        // console.log((new Date(res.reservationDate)).setHours(0, 0, 0, 0,), res.reservationDate)
+        // console.log((new Date(res.reservationDate).setHours(0, 0, 0, 0,)) === new Date(new Date(day.date).toLocaleDateString()).setHours(0, 0, 0, 0,))
+        if ((new Date(res.reservationDate).setHours(0, 0, 0, 0,)) === new Date(new Date(day.date).toLocaleDateString()).setHours(0, 0, 0, 0,)) {
+            console.log('reservation day match')
+            console.log(day, 'day object')
+            day.slots.forEach((time) => {
+              if (time.time === res.startHour) 
+              console.log(time.time, 'timeeee')
+              console.log(res.startHour, 'res time')
+                while (res.startHour < res.endHour) {
+                  time.reserved = true
+                  console.log('what')
+                }
+                  
+            })
+          }
         })
       })
     }

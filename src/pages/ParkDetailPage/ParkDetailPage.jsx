@@ -66,7 +66,7 @@ export default function ParkDetailPage(props) {
               </Form.Group>
               <Form.Group>
                 <Form.Label>Reservation Date</Form.Label>
-                <Form.Control name="reservationDate" type="date" />
+                <Form.Control name="reservationDate" type="datetime-local" />
               </Form.Group>
               <Form.Group>
                 <Form.Label>Start Time</Form.Label>
