@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import './NavBar.css'
 import * as userService from '../../utilities/users-service';
 
 export default function NavBar({ user, setUser }) {
@@ -8,13 +9,16 @@ export default function NavBar({ user, setUser }) {
   }
 
   return (
-    <nav>
-      <Link to="/parks">All Parks</Link>
-      &nbsp; | &nbsp;
-      <Link to="/parks/details">Park Details</Link>
-      &nbsp;&nbsp;
-      <span>Welcome, {user.name}</span>
-      &nbsp;&nbsp;<Link to="" onClick={handleLogOut}>Log Out</Link>
+    <nav className='navbar'>
+      <div className="left-items">
+        <Link to="/">Home</Link>
+        <Link to="/parks">All Parks</Link>
+      </div>
+      <div className="right-items">
+        <Link to="/parks/details">My Reservations</Link>
+        <Link to="" onClick={handleLogOut}>Log Out</Link>
+        <span>Welcome, {user.name}</span>
+      </div>
     </nav>
   );
 }

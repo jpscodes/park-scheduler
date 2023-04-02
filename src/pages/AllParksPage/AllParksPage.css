@@ -1,5 +1,11 @@
+body {
+  background-image: url("https://images.unsplash.com/photo-1547013035-e12451b7aa36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1774&q=80");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
 .park-card {
-  background-color: #f5f5f5;
   margin-bottom: 20px;
   padding: 20px;
   border: none;
@@ -28,4 +34,52 @@
 
 .card-link {
   color: blue;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 100vh; /* set the height of the form to the height of the viewport */
+}
+
+form > * {
+  flex-basis: 100%; /* set the width of the form elements to 100% */
+  max-width: 400px; /* set the maximum width of the form elements to 400px */
+}
+
+form input[type="text"],
+form button[type="submit"] {
+  margin: 10px; /* add some margin around the form elements */
+}
+
+.parks-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 80px; /* adjust the margin-top value as needed */
+}
+
+.parks-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+.park-card {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.card-link {
+  color: blue;
+}
+
+@media only screen and (max-width: 768px) {
+  .park-card-container {
+    max-width: 90%; /* adjust the max-width value for smaller screens */
+  }
 }

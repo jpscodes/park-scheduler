@@ -7,6 +7,7 @@ import ParkAvailabilityCalendar from '../../components/ParkAvailabilityCalendar/
 import './ParkDetailPage.css';
 
 export default function ParkDetailPage(props) {
+  // let timeSlots = [1, 2, 3, 4, 5]
   let timeSlots = [1, 2, 3, 4, 5]
   // need help passing data to this page that's needed from my components, but do I need to make it a state vaiable
   const [park, setPark] = useState({});

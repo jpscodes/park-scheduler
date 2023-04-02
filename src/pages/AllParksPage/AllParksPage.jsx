@@ -24,35 +24,35 @@ export default function AllParksPage() {
 
   return (
     <>
-      <h1>AllParksPage</h1>
-      <button onClick={handleCheckToken}>Check When My Login Expires</button> 
       <form onSubmit={handleSearch}>
         <input type="text" onChange={(evt) => setSearch(evt.target.value)} value={search}/>
         <button type="submit">Search Parks</button>
       </form>
       <div className="parks-container">
-      {parksData2.map(park => (
-          <Card key={park._id} className="park-card">
-            <Card.Header>
-              <Card.Title>{park.name}</Card.Title>
-            </Card.Header>
-            <Card.Body>
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <strong>Features: </strong>
-                  <br />
-                  {park.feature_desc.map(feature => (
-                    <span key={feature}>{feature} | </span>
-                  ))}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <strong>Hours: </strong>
-                  {park.hours}
-                </ListGroup.Item>
-              </ListGroup>
-              <Link to={`/parks/${park._id}`}>Details</Link>
-            </Card.Body>
-          </Card>
+        {parksData2.map(park => (
+          <div key={park._id} className="park-card-container">
+            <Card key={park._id} className="park-card">
+              <Card.Header>
+                <Card.Title>{park.name}</Card.Title>
+              </Card.Header>
+              <Card.Body>
+                <ListGroup variant="flush">
+                  <ListGroup.Item>
+                    <strong>Features: </strong>
+                    <br />
+                    {park.feature_desc.map(feature => (
+                      <span key={feature}>{feature} | </span>
+                    ))}
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <strong>Hours: </strong>
+                    {park.hours}
+                  </ListGroup.Item>
+                </ListGroup>
+                <Link to={`/parks/${park._id}`}>Details</Link>
+              </Card.Body>
+            </Card>
+          </div>
         ))}
       </div>
     </>
