@@ -14,7 +14,7 @@ export default function MyReservationsPage({user}) {
       if (user && user._id) {
         const reservations = await reservationsAPI.searchMyReservations(user._id);
         // console.log(reservations)
-        setMyReservations(reservations);
+        setMyReservations(reservations); 
       }
     }
   

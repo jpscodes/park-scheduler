@@ -9,6 +9,7 @@ module.exports = {
 
 async function makeReservation(req, res) {
   req.body.user = req.user._id
+  req.body.reservationDate += 'T00:00'
   const reservation = await Reservation.create(req.body)
   res.json(reservation)
   

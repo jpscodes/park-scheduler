@@ -8,14 +8,8 @@ import './ParkDetailPage.css';
 import NavBar from '../../components/NavBar/NavBar';
 
 export default function ParkDetailPage(props) {
-  // let timeSlots = [1, 2, 3, 4, 5]
-  let timeSlots = [1, 2, 3, 4, 5]
-  // need help passing data to this page that's needed from my components, but do I need to make it a state vaiable??
-  const [park, setPark] = useState({});
-  // const [parkHoursStart, setParkHoursStart] = useState([]);
-  // const [parkHoursEnd, setParkHoursEnd] = useState([]);
-  // const [weekOffset, setWeekOffset] = useState(0);
-  // const [reservations, setReservations] = useState('');
+  const [timeSlots, setTimeSlots] = useState([]);
+  const [park, setPark] = useState(null);
   const [reservation, setReservation] = useState({
     name: '',
     feature_desc: 'Baseball/Softball',
@@ -24,6 +18,30 @@ export default function ParkDetailPage(props) {
     endHour: '',
   });
   const {id} = useParams();
+
+  useEffect(() => {
+    async function getDetails() {
+      const park = await parksAPI.getPark(id)
+      if (park.hours === '24 Hours') {
+        park.hoursStart = ['24 Hours', 0];
+        park.hoursEnd = ['24 Hours', 23];
+      } else if (park.hours) {
+        let parkOpen = park.hours.match(/(\d{1,2})(?::\d{1,2})?\s*a\.m\./);
+        park.hoursStart = parseInt(parkOpen[1])
+        let parkClose = park.hours.match(/(\d{1,2})(?::\d{2})?\s*p\.m\./);
+        park.hoursEnd = parseInt(parkClose[1]) + 12
+      }
+      let times = []
+      for (let time = park.hoursStart; time <= park.hoursEnd; time += 0.5) {
+        times.push(time)
+      }
+      setTimeSlots(times)
+      setPark(park)
+    }
+    getDetails()
+  }, [])
+
+  if (!park) return null
 
   function handleChange(evt) {
     const newReservation = {...reservation, [evt.target.name]: evt.target.value}  
@@ -39,13 +57,6 @@ export default function ParkDetailPage(props) {
     const r = await reservationsAPI.makeReservation(newReservation)
   }
   
-  useEffect(() => {
-    async function getDetails() {
-      const parkDetail = await parksAPI.getPark(id)
-      setPark(parkDetail)
-    }
-    getDetails()
-  }, [])
   
   const reservableFeatures = ['Baseball/Softball', 'Flag Football', 'Football', 'Golf', 'Lacrosse', 'Lawn Bowling', 'Pickelball Court', 'Rugby', 'Soccer', 'T-Ball']
   return (
@@ -77,22 +88,28 @@ export default function ParkDetailPage(props) {
                 <Form.Label>Start Time</Form.Label>
                 <Form.Control name="startHour" as="select" id="start-time">
                   <option value="default">Select Time</option>
-                  {timeSlots.map((time, index) => (
-                    <option key={index} value={time}>
-                      {time}
-                    </option>
-                  ))}
+                  {timeSlots.map((time, index) => {
+                    let hour = Math.floor(time);
+                    let minutes = (time - hour) * 60;
+                    let suffix = hour >= 12 ? 'PM' : 'AM';
+                    hour = hour % 12 || 12;
+                    let formattedTime = hour + ':' + (minutes < 10 ? '0' : '') + minutes + ' ' + suffix;
+                    return <option key={index} value={time}>{formattedTime}</option>;
+                  })}
                 </Form.Control>
               </Form.Group>
               <Form.Group>
                 <Form.Label>End Time</Form.Label>
                 <Form.Control name="endHour" as="select" id="end-time">
                   <option value="default">Select Time</option>
-                  {timeSlots.map((time, index) => (
-                    <option key={index} value={time}>
-                      {time}
-                    </option>
-                  ))}
+                  {timeSlots.map((time, index) => {
+                    let hour = Math.floor(time);
+                    let minutes = (time - hour) * 60;
+                    let suffix = hour >= 12 ? 'PM' : 'AM';
+                    hour = hour % 12 || 12;
+                    let formattedTime = hour + ':' + (minutes < 10 ? '0' : '') + minutes + ' ' + suffix;
+                    return <option key={index} value={time}>{formattedTime}</option>;
+                  })}
                 </Form.Control>
               </Form.Group>
               <Button
