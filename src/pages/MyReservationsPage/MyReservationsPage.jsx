@@ -11,11 +11,11 @@ export default function MyReservationsPage({user}) {
   
   useEffect(() => {
     async function findMyReservations() {
-      if (user && user._id) {
+      // if (user && user._id) {
         const reservations = await reservationsAPI.searchMyReservations(user._id);
-        // console.log(reservations)
+        console.log(reservations, 'reservations')
         setMyReservations(reservations); 
-      }
+      // }
     }
   
     async function getReservedParks() {
@@ -27,7 +27,7 @@ export default function MyReservationsPage({user}) {
           if (!parksArr.includes(res.park)) {
             parksArr.push(res.park);
           }
-          console.log(parksArr, 'park id array')
+          console.log(parksArr, 'park id  array')
           parksArr.forEach(async (parkId) => {
             const searchResults = await parksAPI.getPark(parkId);
             console.log(searchResults.name, 'searchResults.name')
@@ -55,13 +55,13 @@ export default function MyReservationsPage({user}) {
       <div>
         <h1>My Reservations</h1>
         <ul>
-          {myReservations && reservedParks && myReservations.map((reservation) => {
-            const park = reservedParks.find((p) => p._id === reservation.park);
+          {myReservations && myReservations.map((reservation) => {
+            const park = reservedParks && reservedParks.find((p) => p._id === reservation.park);
             return (
               <div className="reservation-item" key={reservation._id}>
                 <p className="reservation-name">Reservation Name: {reservation.name}</p>
                 <p className="reservation-time">Reservation Time: {reservation.startHour} - {reservation.endHour}</p>
-                <p className="park-name">Park Name: {park ? park.name : ''}</p>
+                <p className="park-name">Park Name: {park ? park.name : ' '}</p> /* only getting this on second render */ 
                 <button className="delete-button">Delete</button>
               </div>
             );
