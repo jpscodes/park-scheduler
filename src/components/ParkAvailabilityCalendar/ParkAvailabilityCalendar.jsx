@@ -46,32 +46,40 @@ export default function ParkAvailabilityCalendar({park}) {
       }
     renderCalendar()
   }, [weekOffset])
-  // console.log(weekCalendar, 'the weekCalendar')
+  console.log(weekCalendar, 'the weekCalendar')
 
   return (
   <>
     <div className="table-container">
       <h2>Calendar</h2>
-        <Button onClick={() => setWeekOffset(weekOffset - 1)}>{'<'}</Button>
-        <Button onClick={() => setWeekOffset(weekOffset + 1)}>{'>'}</Button>
-      <Table striped bordered>
+      <Button style={{ backgroundColor: 'rgb(108, 148, 177)' }} onClick={() => setWeekOffset(weekOffset - 1)}>{'<'}</Button>
+      <Button style={{ backgroundColor: 'rgb(108, 148, 177)' }} onClick={() => setWeekOffset(weekOffset + 1)}>{'>'}</Button>
+      <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Park Hours</th>
-            {weekCalendar && weekCalendar.map((day, index) => (
-              <th key={index}>
-                {day.date.toDateString().slice(4, -5)}
-              </th>
-            ))}
+            <th>Time</th>
+            {weekCalendar && weekCalendar.map(day => <th key={day.date}>{day.date.toDateString().slice(4, -5)}</th>)}
           </tr>
         </thead>
         <tbody>
-          {weekCalendar && (weekCalendar[0].slots.length > 1) && weekCalendar[0].slots.map((slot, index) => ( // assuming all days have the same slots
+          {weekCalendar && weekCalendar[0].slots.map((slot, index) => (
             <tr key={index}>
-              <td>{slot.time}</td>
-              {weekCalendar && weekCalendar.map((day, index) => (
-                <td key={index} style={{backgroundColor: day.slots[index].reserved ? '#FFC0CB' : '#90EE90'}}>
-                  {day.slots[index].reserved ? "Reserved" : "Available"}
+              <td>
+                {
+                  (() => {
+                    let time = slot.time;
+                    let hour = Math.floor(time);
+                    let minutes = (time - hour) * 60;
+                    let suffix = hour >= 12 ? 'PM' : 'AM';
+                    hour = hour % 12 || 12;
+                    let formattedTime = hour + ':' + (minutes < 10 ? '0' : '') + minutes + ' ' + suffix;
+                    return formattedTime;
+                  })()
+                }
+              </td>
+              {weekCalendar.map(day => (
+                <td className="reservation-boxes" key={day.date} style={{backgroundColor: day.slots[index].reserved ? '#FFC0CB' : 'rgb(108, 148, 177)'}}>
+                  {day.slots[index].reserved ? 'Reserved' : ''}
                 </td>
               ))}
             </tr>

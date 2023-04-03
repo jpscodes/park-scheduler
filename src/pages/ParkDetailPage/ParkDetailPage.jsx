@@ -75,7 +75,7 @@ export default function ParkDetailPage(props) {
         <div className="form-container">
           <div className="reservation-form px-4 py-3">
             <h3>Make a Reservation</h3>
-            <Form onChange={handleChange} onSubmit={handleSubmit}>
+            <Form onChange={handleChange} onSubmit={handleSubmit} className="form-box">
               <Form.Group>
                 <Form.Label>Reservation Name</Form.Label>
                 <Form.Control name="name" type="text" placeholder="Enter Reservation Name" />

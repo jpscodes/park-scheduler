@@ -48,6 +48,7 @@ export default function MyReservationsPage({user}) {
 
 
   console.log(reservedParks, 'reserveed prk')
+  
   return (
     <div>
       <h1>Park Reservations</h1>
@@ -61,7 +62,7 @@ export default function MyReservationsPage({user}) {
               <div className="reservation-item" key={reservation._id}>
                 <p className="reservation-name">Reservation Name: {reservation.name}</p>
                 <p className="reservation-time">Reservation Time: {reservation.startHour} - {reservation.endHour}</p>
-                <p className="park-name">Park Name: {park ? park.name : ' '}</p> /* only getting this on second render */ 
+                <p className="park-name">Park Name: {park ? park.name : ''}</p> /* only getting this on second render */ 
                 <button className="delete-button">Delete</button>
               </div>
             );
