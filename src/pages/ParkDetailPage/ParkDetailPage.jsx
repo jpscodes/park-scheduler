@@ -5,16 +5,17 @@ import * as parksAPI from '../../utilities/parks-api';
 import * as reservationsAPI from '../../utilities/reservations-api';
 import ParkAvailabilityCalendar from '../../components/ParkAvailabilityCalendar/ParkAvailabilityCalendar'
 import './ParkDetailPage.css';
+import NavBar from '../../components/NavBar/NavBar';
 
 export default function ParkDetailPage(props) {
   // let timeSlots = [1, 2, 3, 4, 5]
   let timeSlots = [1, 2, 3, 4, 5]
-  // need help passing data to this page that's needed from my components, but do I need to make it a state vaiable
+  // need help passing data to this page that's needed from my components, but do I need to make it a state vaiable??
   const [park, setPark] = useState({});
-  const [parkHoursStart, setParkHoursStart] = useState([]);
-  const [parkHoursEnd, setParkHoursEnd] = useState([]);
-  const [weekOffset, setWeekOffset] = useState(0);
-  const [reservations, setReservations] = useState('');
+  // const [parkHoursStart, setParkHoursStart] = useState([]);
+  // const [parkHoursEnd, setParkHoursEnd] = useState([]);
+  // const [weekOffset, setWeekOffset] = useState(0);
+  // const [reservations, setReservations] = useState('');
   const [reservation, setReservation] = useState({
     name: '',
     feature_desc: 'Baseball/Softball',
@@ -67,7 +68,7 @@ export default function ParkDetailPage(props) {
               </Form.Group>
               <Form.Group>
                 <Form.Label>Reservation Date</Form.Label>
-                <Form.Control name="reservationDate" type="datetime-local" />
+                <Form.Control name="reservationDate" type="date" />
               </Form.Group>
               <Form.Group>
                 <Form.Label>Start Time</Form.Label>

@@ -3,20 +3,14 @@
   justify-content: space-between;
 }
 
-.table-container {
-  flex: 3;
-}
-
-.form-container {
-  flex: 1;
-}
 
 .reservation-form {
   border: 1px solid #ccc;
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
-  height: 100%;
+  border-color: red;
+  height: 50%;
 }
 
 .btn-stadium {
@@ -41,11 +35,7 @@
   align-items: center;
 }
 
-.reservation-form input {
-  margin-bottom: 10px;
-}
 
-.reservation-form input[type="submit"] {
-  margin-top: auto;
-}
+
+
 

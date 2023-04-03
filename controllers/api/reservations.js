@@ -3,7 +3,8 @@ const Park = require('../../models/park');
 
 module.exports = {
   makeReservation,
-  searchReservations
+  searchReservations,
+  searchMyReservations
 };
 
 async function makeReservation(req, res) {
@@ -17,7 +18,7 @@ async function makeReservation(req, res) {
 async function searchReservations(req, res) {
   console.log(`${req.params.id}`, 'made it to controller')
   try {
-    const reservations = await Reservation.find({park: req.params.id}); // how do I only return reservations that match the park id in the request params
+    const reservations = await Reservation.find({park: req.params.id}); 
     console.log(reservations, 'resssssss')
     res.json(reservations);
   } catch (error) {
@@ -25,3 +26,6 @@ async function searchReservations(req, res) {
   }
 }
 
+async function searchMyReservations(req, res) {
+  console.log(`${req.params.id}`, 'myres made it to controller')
+}

@@ -12,6 +12,11 @@ export async function searchReservations(parkId) {
   return sendRequest(`${BASE_URL}/${parkId}`);
 }
 
+export async function searchMyReservations(userId) {
+  console.log('made it to res utilities')
+  return sendRequest(`${BASE_URL}/${userId}`);
+}
+
 // export async function searchReservations(search) {
 //   console.log('made it to utilities')
 //   return sendRequest(`${BASE_URL}/?search=${search}`);
