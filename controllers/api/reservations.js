@@ -16,10 +16,10 @@ async function makeReservation(req, res) {
 }
 
 async function searchReservations(req, res) {
-  console.log(`${req.params.id}`, 'made it to controller')
+  // console.log(`${req.params.id}`, 'made it to controller')
   try {
     const reservations = await Reservation.find({park: req.params.id}); 
-    console.log(reservations, 'resssssss')
+    // console.log(reservations, 'resssssss')
     res.json(reservations);
   } catch (error) {
     res.status(400).json(error);
@@ -27,5 +27,12 @@ async function searchReservations(req, res) {
 }
 
 async function searchMyReservations(req, res) {
-  console.log(`${req.params.id}`, 'myres made it to controller')
+  // console.log(`${req.params.id}`, 'myres made it to controller')
+  try {
+    const reservations = await Reservation.find({user: req.params.id}); 
+    // console.log(reservations, 'resssssss')
+    res.json(reservations);
+  } catch (error) {
+    res.status(400).json(error);
+  }
 }

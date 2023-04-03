@@ -14,7 +14,7 @@ export async function searchReservations(parkId) {
 
 export async function searchMyReservations(userId) {
   console.log('made it to res utilities')
-  return sendRequest(`${BASE_URL}/${userId}`);
+  return sendRequest(`${BASE_URL}/${userId}/myres`);
 }
 
 // export async function searchReservations(search) {

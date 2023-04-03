@@ -164,7 +164,6 @@ export default function ParkAvailabilityCalendar({park}) {
         </tbody>
       </Table>
     </div>    
-    Calendar Component here!!
   </>
   )
 }

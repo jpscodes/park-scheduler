@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const reservationsCtrl = require('../../controllers/api/reservations');
 
-
+console.log('came here')
 router.post('/', reservationsCtrl.makeReservation);
 router.get('/:id', reservationsCtrl.searchReservations);
-router.get('/:id', reservationsCtrl.searchMyReservations);
+router.get('/:id/myres', reservationsCtrl.searchMyReservations);
 
 
 module.exports = router;
