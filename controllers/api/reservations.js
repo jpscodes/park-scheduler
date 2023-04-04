@@ -30,7 +30,8 @@ async function searchReservations(req, res) {
 async function searchMyReservations(req, res) {
   // console.log(`${req.params.id}`, 'myres made it to controller')
   try {
-    const reservations = await Reservation.find({user: req.params.id}); 
+    const reservations = await Reservation.find({user: req.params.id})
+      .populate('park')
     // console.log(reservations, 'resssssss')
     res.json(reservations);
   } catch (error) {

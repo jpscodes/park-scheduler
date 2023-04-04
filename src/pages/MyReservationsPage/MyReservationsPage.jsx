@@ -44,25 +44,23 @@ export default function MyReservationsPage({user}) {
     
     findMyReservations(); 
     getReservedParks(); 
-  }, [user]);
+  }, []);
 
 
   console.log(reservedParks, 'reserveed prk')
   
   return (
     <div>
-      <h1>Park Reservations</h1>
-      <h1>Park Reservations</h1>
       <div>
         <h1>My Reservations</h1>
         <ul>
           {myReservations && myReservations.map((reservation) => {
-            const park = reservedParks && reservedParks.find((p) => p._id === reservation.park);
+            // const park = reservedParks && reservedParks.find((p) => p._id === reservation.park);
             return (
               <div className="reservation-item" key={reservation._id}>
                 <p className="reservation-name">Reservation Name: {reservation.name}</p>
                 <p className="reservation-time">Reservation Time: {reservation.startHour} - {reservation.endHour}</p>
-                <p className="park-name">Park Name: {park ? park.name : ''}</p> /* only getting this on second render */ 
+                <p className="park-name">Park Name: {reservation.park.name}</p>  
                 <button className="delete-button">Delete</button>
               </div>
             );

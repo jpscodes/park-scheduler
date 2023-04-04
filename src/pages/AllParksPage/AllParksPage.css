@@ -5,19 +5,19 @@
   height: 100vh;
 } */
 
-form {
+.bad-form {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 30vw; 
 }
 
-form > * {
+.bad-form > * {
   flex-basis: 100%; 
   max-width: 400px;  
 }
 
-form button[type="submit"] {
+.bad-form button[type="submit"] {
   margin: 10px; 
   background-color: rgb(108, 148, 177);
 }

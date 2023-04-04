@@ -24,7 +24,7 @@ export default function AllParksPage() {
 
   return (
     <div className="body-container-for-app-parks-page">
-      <form onSubmit={handleSearch}>
+      <form className="bad-form" onSubmit={handleSearch}>
         <input type="text" onChange={(evt) => setSearch(evt.target.value)} value={search}/>
         <button type="submit">Search Parks</button>
       </form>

@@ -15,7 +15,7 @@ export default function NavBar({ user, setUser }) {
         <Link to="/parks">All Parks</Link>
       </div>
       <div className="right-items">
-        <Link to="/parks/details">My Reservations</Link>
+        <Link to="/reservations">My Reservations</Link>
         <Link to="" onClick={handleLogOut}>Log Out</Link>
         <span>Welcome, {user.name}</span>
       </div>
