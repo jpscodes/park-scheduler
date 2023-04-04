@@ -6,11 +6,11 @@ import './AuthPage.css'
 export default function AuthPage({ setUser }) {
   const [showSignUp, setShowSignUp] = useState(false);
   return (
-    <main class="Auth-form">
-      <div class="Auth-content">
-        <h1>AuthPage</h1>
+    <main className="Auth-form">
+      <div className="Auth-content">
+        <h1>Welcome to Park Scheduler, Login or Sign-Up Below</h1>
         <button onClick={() => setShowSignUp(!showSignUp)}>{showSignUp ? 'Log In' : 'Sign Up'}</button>
-        <div class="form-sht">
+        <div className="form-sht">
           { showSignUp ?
               <SignUpForm setUser={setUser} />
               :
