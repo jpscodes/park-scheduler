@@ -8,6 +8,8 @@ export async function searchAPI(search) {
 export async function getPark(id) {
   return sendRequest(`${BASE_URL}/${id}`)
 }
+
+
 // export async function addParkToDB(data) {
 //   return sendRequest(BASE_URL, 'POST', data);
 // }

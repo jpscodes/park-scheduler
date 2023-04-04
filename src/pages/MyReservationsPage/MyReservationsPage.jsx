@@ -46,6 +46,16 @@ export default function MyReservationsPage({user}) {
     getReservedParks(); 
   }, []);
 
+  async function handleDelete(reservationId) {
+    console.log(reservationId, 'reservationId')
+    try {
+      const deleter = await reservationsAPI.deleteMyReservation(reservationId);
+      // await fetch(`/api/reservations/${reservationId}`, { method: 'DELETE' });
+      setMyReservations(myReservations.filter(reservation => reservation._id !== reservationId));
+    } catch (error) {
+      console.error('Failed to delete reservation', error);
+    }
+  }
 
   console.log(reservedParks, 'reserveed prk')
   
@@ -61,7 +71,7 @@ export default function MyReservationsPage({user}) {
                 <p className="reservation-name">Reservation Name: {reservation.name}</p>
                 <p className="reservation-time">Reservation Time: {reservation.startHour} - {reservation.endHour}</p>
                 <p className="park-name">Park Name: {reservation.park.name}</p>  
-                <button className="delete-button">Delete</button>
+                <button className="delete-button" onClick={() => handleDelete(reservation._id)} >Delete</button>
               </div>
             );
           })}

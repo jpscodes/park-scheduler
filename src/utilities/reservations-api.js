@@ -17,6 +17,13 @@ export async function searchMyReservations(userId) {
   return sendRequest(`${BASE_URL}/${userId}/myres`);
 }
 
+export async function deleteMyReservation(reservationId) {
+  console.log('made it to res utilities')
+  return sendRequest(`${BASE_URL}/${reservationId}/myresgone`);
+}
+
+
+
 // export async function searchReservations(search) {
 //   console.log('made it to utilities')
 //   return sendRequest(`${BASE_URL}/?search=${search}`);

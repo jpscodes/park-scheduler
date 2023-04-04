@@ -4,7 +4,8 @@ const Park = require('../../models/park');
 module.exports = {
   makeReservation,
   searchReservations,
-  searchMyReservations
+  searchMyReservations,
+  deleteMyReservation
 };
 
 async function makeReservation(req, res) {
@@ -36,5 +37,23 @@ async function searchMyReservations(req, res) {
     res.json(reservations);
   } catch (error) {
     res.status(400).json(error);
+  }
+}
+
+async function deleteMyReservation(req, res) {
+  console.log(req, 'controller wowww')
+  try {
+    const reservation = await Reservation.findById(req.params.id);
+    if (!reservation) {
+      return res.status(404).json({ error: 'Reservation not found' });
+    }
+    if (reservation.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ error: 'Not authorized to delete this reservation' });
+    }
+    await Reservation.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Reservation deleted successfully' });
+  } catch (error) {
+    console.error('Failed to delete reservation', error);
+    res.status(500).json({ error: 'Failed to delete reservation' });
   }
 }
