@@ -50,15 +50,22 @@ export default function MyReservationsPage({user}) {
     console.log(reservationId, 'reservationId')
     try {
       const deleter = await reservationsAPI.deleteMyReservation(reservationId);
-      // await fetch(`/api/reservations/${reservationId}`, { method: 'DELETE' });
       setMyReservations(myReservations.filter(reservation => reservation._id !== reservationId));
     } catch (error) {
       console.error('Failed to delete reservation', error);
     }
   }
 
-  console.log(reservedParks, 'reserveed prk')
-  
+  const formatTime = (time) => {
+    console.log(time)
+    let hour = Math.floor(time);
+    let minutes = (time - hour) * 60;
+    let suffix = hour >= 12 ? 'PM' : 'AM';
+    hour = hour % 12 || 12;
+    let formattedTime = hour + ':' + (minutes < 10 ? '0' : '') + minutes + ' ' + suffix;
+    return formattedTime;
+  };
+
   return (
     <div>
       <div>
@@ -69,8 +76,8 @@ export default function MyReservationsPage({user}) {
             return (
               <div className="reservation-item" key={reservation._id}>
                 <p className="reservation-name">Reservation Name: {reservation.name}</p>
-                <p className="reservation-time">Reservation Time: {reservation.startHour} - {reservation.endHour}</p>
-                <p className="park-name">Park Name: {reservation.park.name}</p>  
+                <p className="reservation-name">Reservation Date: {reservation.reservationDate.slice(0, 10)}</p>
+                <p className="reservation-time">Reservation Time: {formatTime(reservation.startHour)} - {formatTime(reservation.endHour)}</p>                <p className="park-name">Park Name: {reservation.park.name}</p>  
                 <button className="delete-button" onClick={() => handleDelete(reservation._id)} >Delete</button>
               </div>
             );

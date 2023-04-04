@@ -32,7 +32,7 @@ export default function ParkDetailPage(props) {
         park.hoursEnd = parseInt(parkClose[1]) + 12
       }
       let times = []
-      for (let time = park.hoursStart; time <= park.hoursEnd; time += 0.5) {
+      for (let time = park.hoursStart; time < park.hoursEnd; time += 0.5) {
         times.push(time)
       }
       setTimeSlots(times)

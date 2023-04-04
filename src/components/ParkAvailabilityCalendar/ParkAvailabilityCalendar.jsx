@@ -21,7 +21,7 @@ export default function ParkAvailabilityCalendar({park}) {
         const day = {date, slots: []};
         weeklyCalendar.push(day);
       }
-      for (let time = park.hoursStart; time <= park.hoursEnd; time += 0.5) {
+      for (let time = park.hoursStart; time < park.hoursEnd; time += 0.5) {
         weeklyCalendar.forEach((day) => {
           day.slots.push({time, reserved: false})
         });

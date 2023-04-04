@@ -7,7 +7,7 @@ import MyReservationsPage from '../MyReservationsPage/MyReservationsPage';
 import AllParksPage from '../AllParksPage/AllParksPage';
 import NavBar from '../../components/NavBar/NavBar';
 import ParkDetailPage from '../ParkDetailPage/ParkDetailPage';
-// import HomePage from '../HomePage/HomePage';
+import HomePage from '../HomePage/HomePage';
 // import * as parksAPI from '../../utilities/parks-api';
 
 export default function App() {
@@ -23,7 +23,7 @@ export default function App() {
               <Route path="/reservations" element={<MyReservationsPage user={user} />} />
               <Route path="/parks" element={<AllParksPage />} />
               <Route path="/parks/:id" element={<ParkDetailPage />} />
-              {/* <Route path="/" element={<HomePage />} /> */}
+              <Route path="/" element={<HomePage />} />
             </Routes>
           </>
           :
