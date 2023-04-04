@@ -17,6 +17,8 @@ export default function ParkDetailPage(props) {
     startHour: '',
     endHour: '',
   });
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const {id} = useParams();
 
   useEffect(() => {
@@ -50,6 +52,7 @@ export default function ParkDetailPage(props) {
   
   async function handleSubmit(evt) {
     evt.preventDefault()
+    setFormSubmitted(true);
     const newReservation = {
       ...reservation, 
       park: park._id,
@@ -67,7 +70,7 @@ export default function ParkDetailPage(props) {
       <div className="park-feature-list">Features: { park.feature_desc.map((f, index) => (<Button key={index} className="park-feature-list-button">{f}</Button>))}</div>
       <hr />
       <div className="calendar-container">
-        <ParkAvailabilityCalendar park={park}/>
+        <ParkAvailabilityCalendar park={park} formSubmitted={formSubmitted}/>
         <div className="form-container">
           <div className="reservation-form px-4 py-3">
             <h3>Make a Reservation</h3>

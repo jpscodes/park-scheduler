@@ -4,7 +4,7 @@ import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 import './ParkAvailabilityCalendar.css'
 import * as reservationsAPI from '../../utilities/reservations-api';
 
-export default function ParkAvailabilityCalendar({park}) {
+export default function ParkAvailabilityCalendar({park, formSubmitted}) {
   const [weekOffset, setWeekOffset] = useState(0);
   const [weekCalendar, setWeekCalendar] = useState(null);
   
@@ -29,7 +29,9 @@ export default function ParkAvailabilityCalendar({park}) {
       const reservations = await reservationsAPI.searchReservations(park._id)
       reservations.forEach((res) => {
         weeklyCalendar.forEach((day) => {
-          if ((new Date(res.reservationDate).setHours(0, 0, 0, 0,)) === new Date(new Date(day.date).toLocaleDateString()).setHours(0, 0, 0, 0,)) {
+          console.log(res.reservationDate, day.date, 'do they match')
+          if ((new Date(res.reservationDate).toISOString().slice(0, 10)) === new Date(new Date(day.date).toISOString().slice(0, 10)).toISOString().slice(0, 10)) {
+            console.log(res.reservationDate, day.date, 'times match')
               day.slots.forEach((time) => {
                 if (time.time >= res.startHour && time.time < res.endHour) {
                   // console.log(time.time, 'timeeee')
@@ -45,7 +47,7 @@ export default function ParkAvailabilityCalendar({park}) {
         setWeekCalendar(weeklyCalendar)
       }
     renderCalendar()
-  }, [weekOffset])
+  }, [weekOffset, formSubmitted])
   console.log(weekCalendar, 'the weekCalendar')
 
   return (
