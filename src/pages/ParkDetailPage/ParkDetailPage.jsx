@@ -61,14 +61,10 @@ export default function ParkDetailPage(props) {
   const reservableFeatures = ['Baseball/Softball', 'Flag Football', 'Football', 'Golf', 'Lacrosse', 'Lawn Bowling', 'Pickelball Court', 'Rugby', 'Soccer', 'T-Ball']
   return (
     <>
-      <div>Park Details</div>
-      <div>Park Details</div>
-      <div>Park Details</div>
-      <div>Park Details</div>
-      <div>Name: {park.name}</div>
+      <div className="park-detail-name">{park.name}</div>
       <div>Hours: {park.hours}</div>
       {/* if park feature is equal to reservable park feature list then render link, otherwise render just name. Problem is park doesn't load right away so need to await park to be truthy or we get .map error */}
-      {/* <div>Features: { park.feature_desc.map((f) => (<Link>{f}</Link>))}</div> */}
+      <div className="park-feature-list">Features: { park.feature_desc.map((f, index) => (<Button key={index} className="park-feature-list-button">{f}</Button>))}</div>
       <hr />
       <div className="calendar-container">
         <ParkAvailabilityCalendar park={park}/>

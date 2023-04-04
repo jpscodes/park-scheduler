@@ -114,7 +114,7 @@ input {
 }
 
 input:focus {
-  border-color: var(--orange);
+  border-color: var(grey);
 }
 
 button, a.button {

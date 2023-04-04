@@ -24,6 +24,7 @@
   width: 100%;
   height: 50px;
   margin-top: 20px;
+  background-color: rgb(108, 148, 177);
 }
 
 .reservation-form form {
@@ -41,7 +42,44 @@
   align-items: center;
 }
 
+.park-feature-list-button {
+  background-color:  rgb(108, 148, 177);
+  font-size: 12px;
+}
 
+.park-feature-list-button:hover {
+  background-color: transparent;
+}
 
+.park-detail-name {
+  color: dark gray;
+  font-size: 2rem;
+  padding: 1rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+}
 
+/* .park-card .card-header {
+  background-color: rgb(108, 148, 177);
+  color: dark gray;
+  font-size: 2rem;
+  padding: 1rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+} */
 
+/* .link-buttonstyle {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  background-color: rgb(108, 148, 177);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.link-buttonstyle:hover {
+  background-color: rgb(96, 130, 156);
+} */
